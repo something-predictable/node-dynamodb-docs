@@ -1,4 +1,4 @@
-import { fetchJson, missing } from '@riddance/fetch'
+import { fetchJson } from '@riddance/fetch'
 import { SignatureV4 } from '@smithy/signature-v4'
 import { createHash, createHmac } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
@@ -22,7 +22,7 @@ export async function localAwsEnv(region?: string, profile?: string): Promise<Lo
         AWS_SESSION_TOKEN: process.env.AWS_SESSION_TOKEN,
     }
     if (AWS_REGION && AWS_ACCESS_KEY_ID && AWS_SECRET_ACCESS_KEY) {
-        return { AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY }
+        return { AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN }
     }
     const configLines =
         cachedConfigLines ??
@@ -79,6 +79,10 @@ export function dbRequest<T>(env: Partial<LocalEnv> | undefined, target: string,
         'application/json',
         'DynamoDB_20120810.' + target,
     )
+}
+
+function missing(what?: string): never {
+    throw new Error(what ? `Missing ${what}.` : 'Missing.')
 }
 
 async function awsStringRequest<T>(

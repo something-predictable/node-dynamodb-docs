@@ -1,9 +1,9 @@
 {
   "name": "@riddance/dynamodb-docs",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "files": [
     "*.js",
@@ -22,11 +22,11 @@
     "postpublish": "riddance-sync"
   },
   "dependencies": {
-    "@riddance/docs": "0.0.2",
-    "@riddance/fetch": "0.1.3",
-    "@smithy/signature-v4": "5.3.3"
+    "@riddance/docs": "0.0.3",
+    "@riddance/fetch": "0.1.4",
+    "@smithy/signature-v4": "5.4.3"
   },
   "devDependencies": {
-    "@riddance/env": "0.9.6"
+    "@riddance/env": "0.10.0"
   }
 }

@@ -76,7 +76,7 @@ class Connection {
             }
             throw e
         }
-        return revision as unknown
+        return revision
     }
 
     async get(table: string, partition: string, key: string) {
@@ -382,8 +382,10 @@ function matchRange(range?: KeyRange) {
             return (key: string) => key < before
         }
     }
-    return () => false
+    return none
 }
+
+const none = () => false
 
 function conflict() {
     const e = new Error('Conflict')
